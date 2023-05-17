@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#define MAX_COMMAND_LENGTH 100
+#include <unistd.h>
 
 /**
  * main - check the code
@@ -12,37 +11,40 @@
 
 int main(void)
 {
-char command[MAX_COMMAND_LENGTH];
-char prompt[] = "simple_shell> ";
-
-while (1)
+char *command;
+for (;;)
 {
-printf("%s", prompt);
-
-if (fgets(command, sizeof(command), stdin) == NULL)
+printf("$ ");
+size_t size = getline(&command, 0, stdin);
+if (size == 0)
 {
-printf("\n");
 break;
 }
-
-command[strcspn(command, "\n")] = '\0';
-
-if (strlen(command) == 0)
+if (strcmp(command, "cd") == 0)
+{
+char *directory = getline(&command, 0, stdin);
+if (size == 0)
 {
 continue;
 }
-
+if (chdir(directory) != 0)
+{
+perror("cd");
+continue;
+}
+}
+else if (strcmp(command, "exit") == 0)
+{
+break;
+}
+else
+{
 int status = system(command);
-
-if (status == -1)
+if (status != 0)
 {
-fprintf(stderr, "Error executing the command.\n");
-}
-else if (status != 0)
-{
-fprintf(stderr, "Command exited with non-zero status: %d\n", status);
+perror(command);
 }
 }
-
+}
 return (0);
 }
