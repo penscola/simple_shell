@@ -1,4 +1,4 @@
-#include "holberton.h"
+#include "header.h"
 
 /**
  * _strdup - duplicates a str in the heap memory.

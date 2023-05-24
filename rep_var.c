@@ -1,4 +1,4 @@
-#include "holberton.h"
+#include "header.h"
 
 /**
  * check_env - checks if the typed variable is an env variable

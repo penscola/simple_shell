@@ -1,4 +1,4 @@
-#include "holberton.h"
+#include "header.h"
 
 /**
  * without_comment - deletes comments from the input

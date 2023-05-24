@@ -1,4 +1,4 @@
-#include "holberton.h"
+#include "header.h"
 
 /**
  * is_cdir - checks ":" if is in the current directory.
