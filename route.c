@@ -42,4 +42,5 @@ char *find_command(char *command)
 					}}}}
 		environ++;
 	}
-	
+	return NULL;
+}
